@@ -1,10 +1,12 @@
 Agendaess-Deploy Fork
 ---------------------
 
-Changes: put "python" links in /usr/local/bin, don't try to build 2.4 (doesn't
-build on Ubuntu 14.04), make sure we get pypy and pypy3 on Ubuntu.  The changes
-I've made to the pypy and pypy3 configs mean this will actually only work on
-Ubuntu.
+Changes: don't try to build 2.4 (doesn't build on Ubuntu 14.04), make sure we
+get pypy and pypy3 on Ubuntu, allow install_links script to put links in a
+place signified by the INSTALL_LINKS_PREFIX envvar.  The changes I've made to
+the pypy and pypy3 configs mean this will actually only work on Ubuntu 12.04
+and 14.04, because the pypy versions that work on Ubuntu are downloaded without
+regard to the actual platform.
 
 Introduction
 ------------
