@@ -39,10 +39,10 @@ for src, name in links:
                 print "No change needed for symlink to '%s' at '%s'." % (src, dst)
                 continue
             else:
-                print "Replacing symlink at '%s' pointing to '%s' with symlink to '%s'" % (dst, os.readlink(dst), src))
+                print "Replacing symlink at '%s' pointing to '%s' with symlink to '%s'" % (dst, os.readlink(dst), src)
                 os.unlink(dst)
         else:
-            print "Won't replace regular file '%s' with symlink to '%s'" % (dst, src))
+            print "Won't replace regular file '%s' with symlink to '%s'" % (dst, src)
             continue
     os.symlink(src, dst)
     print "Created symlink to '%s' at '%s'." % (src, dst)
