@@ -4,21 +4,7 @@ import os
 import sys
 
 
-def yesno(question):
-    question = "%s [yes/No] " % question
-    answers = {
-        False: ('', 'n', 'no'),
-        True: ('y', 'yes'),
-    }
-    while 1:
-        answer = raw_input(question).lower()
-        for option in answers:
-            if answer in answers[option]:
-                return option
-        print >>sys.stderr, "You have to answer with y, yes, n or no."
-
-
-prefix = os.environ.get('INSTALL_LINKS_PREFIX')
+prefix = sys.argv[1]
 if not prefix:
     prefix = os.path.expanduser("${install-links:prefix}")
 buildout = "${buildout:directory}"
@@ -26,8 +12,6 @@ bindir = os.path.join(prefix, 'bin')
 
 
 if not os.path.exists(bindir):
-    if not yesno("Create directory '%s'?" % bindir):
-        sys.exit(1)
     os.makedirs(bindir)
 
 
@@ -55,12 +39,10 @@ for src, name in links:
                 print "No change needed for symlink to '%s' at '%s'." % (src, dst)
                 continue
             else:
-                if not yesno("Replace symlink at '%s' pointing to '%s' with symlink to '%s'?" % (dst, os.readlink(dst), src)):
-                    continue
+                print "Replacing symlink at '%s' pointing to '%s' with symlink to '%s'" % (dst, os.readlink(dst), src))
                 os.unlink(dst)
         else:
-            if not yesno("Replace regular file '%s' with symlink to '%s'?" % (dst, src)):
-                continue
-            os.unlink(dst)
+            print "Won't replace regular file '%s' with symlink to '%s'" % (dst, src))
+            continue
     os.symlink(src, dst)
     print "Created symlink to '%s' at '%s'." % (src, dst)
